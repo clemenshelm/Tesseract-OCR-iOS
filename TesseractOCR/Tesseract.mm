@@ -249,6 +249,17 @@ namespace tesseract {
     return text;
 }
 
+- (NSString *)recognizedHOCRForPageNumber:(int)pageNumber {
+    char *hocr = _tesseract->GetHOCRText(pageNumber);
+    if (hocr) {
+        NSString *text = [NSString stringWithUTF8String:hocr];
+        free(hocr);
+        return text;
+    }
+  
+    return nil;
+}
+
 - (NSArray *)characterBoxes {
     NSMutableArray *recognizedTextBoxes = [[NSMutableArray alloc] init];
     
